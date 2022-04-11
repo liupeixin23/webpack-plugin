@@ -1,0 +1,6 @@
+# 4 files emitted by webpack
+
+- 6cbc9a643905507766e445c7d34711f7.png
+- 5f88a19cba8a1611749e3e2192c1b1c2.png
+- main.js
+- index.html

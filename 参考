@@ -1,0 +1,37 @@
+const {
+  SyncHook,
+  SyncBailHook,
+  SyncWaterfallHook,
+  SyncLoopHook,
+  AsyncParallelHook,
+  AsyncParallelBailHook,
+  AsyncSeriesHook,
+  AsyncSeriesBailHook,
+  AsyncSeriesWaterfallHook,
+} = require("tapable");
+
+let fkhook = new SyncHook(["name"]);
+
+fkhook.tap("fk01p", (a) => {
+  console.log("fk01p-------->", a);
+});
+
+fkhook.tap("fk02p", (b) => {
+  console.log("fk02p-------->", b);
+});
+
+fkhook.intercept({
+  tap: (t) => {
+    console.log("intercept tap------->", t);
+  },
+  call: (name) => {
+    console.log("intercept call------->", name);
+  },
+  register: (tapInfo) => {
+    // tapInfo = { type: "promise", name: "GoogleMapsPlugin", fn: ... }
+    console.log("tapInfo------------->", tapInfo);
+    return tapInfo; // may return a new tapInfo object
+  },
+});
+
+fkhook.call("fk");
